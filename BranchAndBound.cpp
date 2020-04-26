@@ -1,5 +1,5 @@
 //
-// Created by LENOVO on 25/04/2020.
+// Created by CHAKER Jugurtha on 25/04/2020.
 //
 
 #include "BranchAndBound.h"
