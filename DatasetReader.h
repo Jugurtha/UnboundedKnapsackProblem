@@ -24,6 +24,10 @@ public:
     DatasetReader(const std::string &path);
     Instance getInstance();
 private:
+public:
+    virtual ~DatasetReader();
+
+private:
     std::string path;
     std::ifstream infile;
 };

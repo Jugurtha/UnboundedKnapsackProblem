@@ -47,3 +47,7 @@ Instance DatasetReader::getInstance()
         std::cout << "Weight : " << e.weight << ", Value : "<< e.value << "\n";
 */    return instance;
 }
+
+DatasetReader::~DatasetReader() {
+    infile.close();
+}

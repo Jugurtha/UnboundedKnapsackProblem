@@ -1,6 +1,8 @@
 #include <iostream>
+#include <chrono>
 #include "BranchAndBound.h"
 #include "DatasetReader.h"
+#include "Logger.h"
 
 Objects sortObjects(Objects const&  objs) {
     Objects sortedObjs;
@@ -23,28 +25,29 @@ int computeWeight(Objects const& orderedObj, std::vector<int> const& tuple)
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    //DatasetReader datasetReader("./Dataset/Facile/Petite/Facile/Petite.txt");
-    DatasetReader datasetReader("C:\\Development\\C++\\TESTS\\OPTIM\\UnboundedKnapsackProblem\\Datasets\\Facile\\Petite\\FacilePetite.txt");
+    std::string instancePath("C:\\Development\\C++\\TESTS\\OPTIM\\UnboundedKnapsackProblem\\Datasets\\Difficile\\Grande\\DifficileGrande2.txt");
+    DatasetReader datasetReader(instancePath);
     auto instance = datasetReader.getInstance();
     std::cout << "n : " << instance.objects.size() << "\n";
     std::cout << "Max weight : " << instance.maxWeight << "\n";
 
     auto sorted = sortObjects(instance.objects);
-    for(auto e : sorted)
+/*    for(auto e : sorted)
         std::cout << "Weight : " << e.weight << ", Value : "<< e.value << "\n";
-
-/*    Objects objects{ {10,60}, {20,100}, {30,120}};
-    BranchAndBound bb(50,objects);
-    auto result = bb.search();
-    std::cout << "Value : " << result.value << "\nSet : {\t";
-    for(auto e : result.tuple)
-        std::cout << e << "\t";
-    std::cout << "}";
 */
 
     BranchAndBound bb(instance.maxWeight, instance.objects);
+
+    auto start = std::chrono::high_resolution_clock::now();
     auto result = bb.search();
-    std::cout << "Value : " << result.value << "\nWeight : " << computeWeight(sorted, result.tuple) << "\nSet : {\n";
+    auto end = std::chrono::high_resolution_clock::now();
+
+    auto weight = computeWeight(sorted, result.tuple);
+    Logger logger("log.csv");
+    logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
+
+
+    std::cout << "Value : " << result.value << "\nWeight : " <<  weight << "\nSet : {\n";
     for(auto e : result.tuple)
         std::cout << e << "\n";
     std::cout << "}";
