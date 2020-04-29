@@ -8,10 +8,13 @@ Objects sortObjects(Objects const&  objs) {
     Objects sortedObjs;
     for(auto o : objs)
         sortedObjs.push_back(o);
+    std::sort(sortedObjs.begin(), sortedObjs.end(),[](const Object & a, const Object & b) -> bool{
+        double dav = a.value, daw = a.weight;
+        double dbv = b.value, dbw = b.weight;
+        return (dav/daw) > (dbv/dbw);
 
-    std::sort(sortedObjs.begin(), sortedObjs.end(),[](const Object & a, const Object & b) -> bool{ return a.value/a.weight > b.value/b.weight;});
-    //for(auto e :sortedObjs)
-    //    std::cout << "{" << e.value << ", " << e.weight << "} = " << e.value/e.weight << "\n";
+    });
+
     return sortedObjs;
 }
 
@@ -24,17 +27,18 @@ int computeWeight(Objects const& orderedObj, std::vector<int> const& tuple)
 }
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::string instancePath("C:\\Development\\C++\\TESTS\\OPTIM\\ASMA\\demoinstancetest.txt");
+    
+    std::string instancePath("../Datasets/Facile/Petite/FacilePetite.txt");
+    std::cout << "Instance : " << instancePath << '\n';
     DatasetReader datasetReader(instancePath);
     auto instance = datasetReader.getInstance();
-    std::cout << "n : " << instance.objects.size() << "\n";
-    std::cout << "Max weight : " << instance.maxWeight << "\n";
+    std::cout << "n : " << instance.objects.size() << '\n';
+    std::cout << "Max weight : " << instance.maxWeight << "\n\n";
 
     auto sorted = sortObjects(instance.objects);
 //*
     for(auto e : sorted)
-        std::cout << "Weight : " << e.weight << ", Value : "<< e.value << "\n";
+        std::cout << "Weight : " << e.weight << ", Value : "<< e.value << '\n';
 //*/
 
     BranchAndBound bb(instance.maxWeight, instance.objects);
@@ -48,10 +52,10 @@ int main() {
     logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 
 
-    std::cout << "Value : " << result.value << "\nWeight : " <<  weight;
-    std::cout << "\nSet : {\n";
+    std::cout << "\nValue : " << result.value << "\nWeight : " <<  weight;
+    std::cout << "\nSet : {";
     for(auto e : result.tuple)
-       std::cout << e << "\n";
+       std::cout << e << " ";
     std::cout << "}";
 
     return 0;

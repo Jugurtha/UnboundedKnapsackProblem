@@ -39,18 +39,18 @@ using Objects =   std::vector<Object>;
 
 class BranchAndBound {
 public:
-    BranchAndBound(unsigned int maxWeight, Objects objects);
+    BranchAndBound(unsigned int maxWeight, Objects const& objects);
     Solution search();
 private:
     unsigned int maxWeight;
     std::vector<int> weights;
     std::vector<int> values;
 
-    std::vector<int> separate(unsigned int maxWeight, Objects sortedObjects, std::vector<int> tuple);
-    bool isASolution(unsigned int maxWeight, Objects sortedObjects,  std::vector<int> tuple);
-    Evaluation evaluate(unsigned int maxWeight, Objects sortedObjects, std::vector<int> tuple);
+    std::vector<int> separate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple);
+    bool isASolution(unsigned int maxWeight, Objects const& sortedObjects,  std::vector<int> tuple);
+    Evaluation evaluate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple);
     Objects sortObjects();
-    Solution findSolution(unsigned int maxWeight, Objects sortedObjects);
+    Solution findSolution(unsigned int maxWeight, Objects const& sortedObjects);
 };
 
 #endif //UNBOUNDEDKNAPSACKPROBLEM_BRANCHANDBOUND_H
