@@ -25,16 +25,17 @@ int computeWeight(Objects const& orderedObj, std::vector<int> const& tuple)
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    std::string instancePath("C:\\Development\\C++\\TESTS\\OPTIM\\UnboundedKnapsackProblem\\Datasets\\Difficile\\Grande\\DifficileGrande2.txt");
+    std::string instancePath("C:\\Development\\C++\\TESTS\\OPTIM\\ASMA\\demoinstancetest.txt");
     DatasetReader datasetReader(instancePath);
     auto instance = datasetReader.getInstance();
     std::cout << "n : " << instance.objects.size() << "\n";
     std::cout << "Max weight : " << instance.maxWeight << "\n";
 
     auto sorted = sortObjects(instance.objects);
-/*    for(auto e : sorted)
+//*
+    for(auto e : sorted)
         std::cout << "Weight : " << e.weight << ", Value : "<< e.value << "\n";
-*/
+//*/
 
     BranchAndBound bb(instance.maxWeight, instance.objects);
 
@@ -47,9 +48,10 @@ int main() {
     logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 
 
-    std::cout << "Value : " << result.value << "\nWeight : " <<  weight << "\nSet : {\n";
+    std::cout << "Value : " << result.value << "\nWeight : " <<  weight;
+    std::cout << "\nSet : {\n";
     for(auto e : result.tuple)
-        std::cout << e << "\n";
+       std::cout << e << "\n";
     std::cout << "}";
 
     return 0;

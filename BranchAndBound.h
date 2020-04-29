@@ -18,7 +18,7 @@ struct Object{
 
 struct Evaluation{
             bool isAsolution;
-            int value;
+            double value;
             std::vector<int> tuple;
 };
 
@@ -32,7 +32,7 @@ struct Node
 {
     int depth;
     std::vector<int> tuple;
-    int eval;
+    double eval;
 };
 
 using Objects =   std::vector<Object>;
