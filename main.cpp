@@ -28,9 +28,13 @@ int computeWeight(Objects const& orderedObj, std::vector<int> const& tuple)
 
 int main() {
     
-    std::string instancePath("../Datasets/Facile/Petite/FacilePetite.txt");
+    std::string instancePathAghilas("../../ASMA/demoinstancetest.txt");
+    //auto instanceCours = Instance{130,{{33,4},{49,5},{60,6},{32,2}}};
+    //std::string instancePath("../Datasets/Facile/Petite/FacilePetite.txt");
+    std::string instancePath(instancePathAghilas);
     std::cout << "Instance : " << instancePath << '\n';
     DatasetReader datasetReader(instancePath);
+    //auto instance = instanceCours;
     auto instance = datasetReader.getInstance();
     std::cout << "n : " << instance.objects.size() << '\n';
     std::cout << "Max weight : " << instance.maxWeight << "\n\n";
@@ -49,7 +53,7 @@ int main() {
 
     auto weight = computeWeight(sorted, result.tuple);
     Logger logger("log.csv");
-    logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
+    logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count());
 
 
     std::cout << "\nValue : " << result.value << "\nWeight : " <<  weight;
