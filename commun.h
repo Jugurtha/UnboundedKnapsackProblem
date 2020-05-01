@@ -22,6 +22,30 @@ struct Solution
 {
     std::vector<int> tuple;
     int value;
+
+    bool operator<(const Solution &rhs) const {
+        return value < rhs.value;
+    }
+
+    bool operator>(const Solution &rhs) const {
+        return rhs < *this;
+    }
+
+    bool operator<=(const Solution &rhs) const {
+        return !(rhs < *this);
+    }
+
+    bool operator>=(const Solution &rhs) const {
+        return !(*this < rhs);
+    }
+
+    bool operator==(const Solution &rhs) const {
+        return value == rhs.value;
+    }
+
+    bool operator!=(const Solution &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 #endif //UNBOUNDEDKNAPSACKPROBLEM_COMMUN_H

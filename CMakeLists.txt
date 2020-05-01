@@ -3,4 +3,4 @@ project(UnboundedKnapsackProblem)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(UnboundedKnapsackProblem main.cpp BranchAndBound.cpp BranchAndBound.h DatasetReader.cpp DatasetReader.h Logger.cpp Logger.h commun.h)
+add_executable(UnboundedKnapsackProblem main.cpp BranchAndBound.cpp BranchAndBound.h DatasetReader.cpp DatasetReader.h Logger.cpp Logger.h commun.h Tabu.cpp Tabu.h Neighbourhood.h TabuList.cpp TabuList.h Localizer.h Fitness.h StoppingCondition.h)

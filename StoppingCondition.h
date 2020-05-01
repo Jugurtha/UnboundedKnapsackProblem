@@ -1,0 +1,15 @@
+//
+// Created by LENOVO on 01/05/2020.
+//
+
+#ifndef UNBOUNDEDKNAPSACKPROBLEM_STOPPINGCONDITION_H
+#define UNBOUNDEDKNAPSACKPROBLEM_STOPPINGCONDITION_H
+
+
+class StoppingCondition {
+public:
+    bool virtual operator()() = 0;
+};
+
+
+#endif //UNBOUNDEDKNAPSACKPROBLEM_STOPPINGCONDITION_H
