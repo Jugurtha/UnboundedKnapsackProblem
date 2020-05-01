@@ -9,7 +9,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include "BranchAndBound.h"
+#include "commun.h"
 
 
 struct Instance

@@ -56,7 +56,7 @@ bool BranchAndBound::isASolution(unsigned int maxWeight, Objects const& sortedOb
     return j == sortedObjects.size();
 }
 
-Evaluation BranchAndBound::evaluate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple) {
+BranchAndBound::Evaluation BranchAndBound::evaluate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple) {
     if (isASolution(maxWeight, sortedObjects,tuple)){
         double sum =0;
         for (auto i=0; i<tuple.size(); i++) {

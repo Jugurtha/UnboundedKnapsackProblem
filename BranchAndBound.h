@@ -5,42 +5,28 @@
 #ifndef UNBOUNDEDKNAPSACKPROBLEM_BRANCHANDBOUND_H
 #define UNBOUNDEDKNAPSACKPROBLEM_BRANCHANDBOUND_H
 
-#include <vector>
-#include <tuple>
-#include <map>
-#include <algorithm>
-#include <iostream>
 
-struct Object{
-    int weight;
-    int value;
-};
+#include "commun.h"
 
-struct Evaluation{
-            bool isAsolution;
-            double value;
-            std::vector<int> tuple;
-};
 
-struct Solution
-{
-        std::vector<int> tuple;
-        int value;
-};
-
-struct Node
-{
-    int depth;
-    std::vector<int> tuple;
-    double eval;
-};
-
-using Objects =   std::vector<Object>;
 
 class BranchAndBound {
 public:
     BranchAndBound(unsigned int maxWeight, Objects const& objects);
     Solution search();
+    struct Evaluation{
+        bool isAsolution;
+        double value;
+        std::vector<int> tuple;
+    };
+
+
+    struct Node
+    {
+        int depth;
+        std::vector<int> tuple;
+        double eval;
+    };
 private:
     unsigned int maxWeight;
     std::vector<int> weights;
