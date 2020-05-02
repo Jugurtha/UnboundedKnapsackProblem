@@ -15,7 +15,7 @@ public:
     auto end(){ return set.end();}
     auto cbegin(){ return set.cbegin();};
     auto cend(){ return set.cend();}
-    Solution first() {*(set.begin());}
+    Solution first() {return *(set.begin());}
 private:
     std::set<Solution> set;
 };

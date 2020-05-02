@@ -12,4 +12,17 @@ public:
 };
 
 
+class StoppingConditionNbrIterations{
+public:
+    StoppingConditionNbrIterations(const unsigned int maxNbrIterations) : MaxNbrIterations(maxNbrIterations) {nbrIterations=0;}
+    bool virtual operator()(){
+        nbrIterations++;
+        return nbrIterations <=  MaxNbrIterations;
+    }
+
+private:
+    unsigned int nbrIterations;
+    const unsigned int MaxNbrIterations;
+};
+
 #endif //UNBOUNDEDKNAPSACKPROBLEM_STOPPINGCONDITION_H
