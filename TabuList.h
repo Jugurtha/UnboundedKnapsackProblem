@@ -6,16 +6,32 @@
 #define UNBOUNDEDKNAPSACKPROBLEM_TABULIST_H
 
 #include "commun.h"
+#include <set>
 
 class TabuList {
 public:
-    bool virtual push(Solution solution) = 0;
-    Solution virtual pop() = 0;
-    bool virtual contains(Solution solution) = 0;
-    size_t virtual size() = 0;
+    virtual bool push(Solution solution) = 0;
+    virtual Solution pop() = 0;
+    virtual bool contains(Solution solution) = 0;
+    virtual size_t size() = 0;
 };
 
 
+class TabuListBestValueSet : public TabuList{
+public:
+    TabuListBestValueSet(const std::set<Solution, std::greater<>> &set);
+
+    bool push(Solution solution) override;
+
+    Solution pop() override;
+
+    bool contains(Solution solution) override;
+
+    size_t size() override;
+
+private:
+    std::set<Solution, std::greater<>> set;
+};
 
 
 

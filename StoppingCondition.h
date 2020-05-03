@@ -8,13 +8,13 @@
 
 class StoppingCondition {
 public:
-    bool virtual operator()() = 0;
+    virtual bool operator()() = 0;
 };
 
 
-class StoppingConditionNbrIterations{
+class StoppingConditionNbrIterations : public StoppingCondition{
 public:
-    StoppingConditionNbrIterations(const unsigned int maxNbrIterations) : MaxNbrIterations(maxNbrIterations) {nbrIterations=0;}
+    explicit StoppingConditionNbrIterations(const unsigned int maxNbrIterations) : MaxNbrIterations(maxNbrIterations) {nbrIterations=0;}
     bool virtual operator()(){
         nbrIterations++;
         return nbrIterations <=  MaxNbrIterations;

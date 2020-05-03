@@ -8,7 +8,16 @@
 
 class Fitness {
 public:
-    double virtual operator()(Solution solution) = 0;
+    virtual double operator()(Solution solution) = 0;
+};
+
+
+class FitnessValue : public Fitness{
+public:
+    double virtual operator()(Solution solution)
+    {
+        return solution.value;
+    }
 };
 
 
