@@ -10,8 +10,18 @@
 
 class Localizer {
 public:
-    Neighbourhood virtual getNeighbors(Solution center) = 0;
+    Localizer(Instance const& instance);
+
+    virtual Neighbourhood getNeighbors(Solution center) = 0;
+
+protected:
+    Objects const& sortedObjects();
+
+    Objects const& objects;
+    const int maxWeight;
+    const bool sorted;
 };
+
 
 
 #endif //UNBOUNDEDKNAPSACKPROBLEM_LOCALIZER_H

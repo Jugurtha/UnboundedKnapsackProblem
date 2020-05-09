@@ -4,7 +4,7 @@
 
 #include "TabuList.h"
 
-TabuListBestValueSet::TabuListBestValueSet(const std::set<Solution, std::greater<>> &set) : set(set) {}
+TabuListBestValueSet::TabuListBestValueSet(const std::set<Solution, std::less<>> &set) : set(set) {}
 
 bool TabuListBestValueSet::push(Solution solution) {
     set.insert(solution);
@@ -28,3 +28,5 @@ bool TabuListBestValueSet::contains(Solution solution) {
 size_t TabuListBestValueSet::size() {
     return set.size();
 }
+
+TabuListBestValueSet::TabuListBestValueSet() {}

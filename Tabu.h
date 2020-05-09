@@ -14,7 +14,7 @@
 
 class Tabu {
 public:
-    Tabu(const Solution &initialSolution, TabuList &tabuList, unsigned int maxTabuSize,
+    Tabu(Solution const& initialSolution, TabuList &tabuList, unsigned int maxTabuSize,
          StoppingCondition &stoppingCondition, Fitness &fitness, Localizer &localizer);
 
     Solution search();

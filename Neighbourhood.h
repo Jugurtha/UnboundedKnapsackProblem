@@ -11,6 +11,8 @@
 class Neighbourhood {
 public:
     Neighbourhood(const std::set<Solution> &set) : set(set) {}
+    Neighbourhood() {}
+    bool push(Solution const& solution) { return set.insert(solution).second;}
     auto begin(){ return set.begin();};
     auto end(){ return set.end();}
     auto cbegin(){ return set.cbegin();};

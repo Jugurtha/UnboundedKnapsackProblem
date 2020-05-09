@@ -12,12 +12,6 @@
 #include "commun.h"
 
 
-struct Instance
-{
-    int  maxWeight;
-    Objects objects;
-};
-
 
 class DatasetReader {
 public:

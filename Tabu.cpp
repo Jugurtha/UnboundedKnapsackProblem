@@ -26,7 +26,7 @@ Solution Tabu::search() {
     return sBest;
 }
 
-Tabu::Tabu(const Solution &initialSolution, TabuList &tabuList, unsigned int maxTabuSize,
+Tabu::Tabu(Solution const& initialSolution, TabuList &tabuList, unsigned int maxTabuSize,
            StoppingCondition &stoppingCondition, Fitness &fitness, Localizer &localizer) : initialSolution(
         initialSolution), tabuList(tabuList), maxTabuSize(maxTabuSize), stoppingCondition(stoppingCondition),
                                                                                            fitness(fitness),

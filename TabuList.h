@@ -19,7 +19,9 @@ public:
 
 class TabuListBestValueSet : public TabuList{
 public:
-    TabuListBestValueSet(const std::set<Solution, std::greater<>> &set);
+    TabuListBestValueSet(const std::set<Solution, std::less<>> &set);
+
+    TabuListBestValueSet();
 
     bool push(Solution solution) override;
 
@@ -30,7 +32,7 @@ public:
     size_t size() override;
 
 private:
-    std::set<Solution, std::greater<>> set;
+    std::set<Solution, std::less<>> set;
 };
 
 

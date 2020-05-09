@@ -3,6 +3,8 @@
 #include "BranchAndBound.h"
 #include "DatasetReader.h"
 #include "Logger.h"
+#include "Tabu.h"
+#include "AddOneLocalizer.h"
 
 Objects sortObjects(Objects const&  objs) {
     Objects sortedObjs;
@@ -46,12 +48,24 @@ int main() {
 //*/
 
     BranchAndBound bb(instance.maxWeight, instance.objects);
+    auto result = bb.search();
+    auto weight = computeWeight(sorted, result.tuple);
+    std::cout << "\nOptimal Solution :\nValue : " << result.value << "\nWeight : " <<  weight << '\n';
+
+    TabuListBestValueSet tabuListBestValueSet;
+    StoppingConditionNbrIterations stoppingConditionNbrIterations(10);
+    FitnessValue fitnessValue;
+    AddOneLocalizer addOneLocalizer(instance);
+    Tabu tabu(Solution{std::vector<int>(instance.objects.size(), 0), 0},
+            tabuListBestValueSet, 100,
+            stoppingConditionNbrIterations, fitnessValue, addOneLocalizer);
 
     auto start = std::chrono::high_resolution_clock::now();
-    auto result = bb.search();
+
+    result = tabu.search();
     auto end = std::chrono::high_resolution_clock::now();
 
-    auto weight = computeWeight(sorted, result.tuple);
+    weight = computeWeight(sorted, result.tuple);
     Logger logger("log.csv");
     logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count());
 

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <iostream>
 
+
 struct Object{
     int weight;
     int value;
@@ -18,8 +19,22 @@ struct Object{
 
 using Objects =   std::vector<Object>;
 
+
+struct Instance
+{
+    int  maxWeight;
+    Objects objects;
+};
+
+
 struct Solution
 {
+    /*
+    Solution(const std::vector<int> &tuple, int value) : tuple(tuple), value(value) {}
+    Solution(Instance const& instance) : tuple(instance.objects.size(), 0), value(0) {}
+    Solution(unsigned int nbrObjects) : tuple(nbrObjects, 0), value(0) {}
+    */
+
     std::vector<int> tuple;
     int value;
 
@@ -47,5 +62,8 @@ struct Solution
         return !(rhs == *this);
     }
 };
+
+
+
 
 #endif //UNBOUNDEDKNAPSACKPROBLEM_COMMUN_H
