@@ -10,6 +10,10 @@ Logger::~Logger() {
     outfile.close();
 }
 
-void Logger::log(std::string instance, int value, int weight, double execTime) {
-    outfile << time(NULL) << ", " << instance << ", " << value << ", " << weight << ", " << execTime << "\n";
+void Logger::log(std::string instance, Result const& optimalResult, Result const& instanceResult) {
+    outfile << time(NULL)
+     << ", " << instance << ", " << optimalResult.value << ", " << optimalResult.weight << ", " << optimalResult.executionTime
+     << ", " << instanceResult.value << ", " << instanceResult.weight << ", " << instanceResult.executionTime << "\n";
 }
+
+

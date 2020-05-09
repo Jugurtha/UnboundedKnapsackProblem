@@ -9,13 +9,12 @@
 Neighbourhood AddOneLocalizer::getNeighbors(Solution center) {
     Neighbourhood neighbourhood;
     Solution next(center);
-    int toAdd = 0;
 
     for (int i = 0; i < center.tuple.size(); ++i) {
         next.tuple[i]++;
         if(sumWeight(next)<maxWeight)
         {
-            next.value += next.tuple[i] * sortedObjects()[i].value;
+            next.value += sortedObjects()[i].value;
             break;
         }
         else

@@ -17,7 +17,7 @@ class DatasetReader {
 public:
     DatasetReader(const std::string &path);
     Instance getInstance();
-private:
+    Result getOptimalResult();
 public:
     virtual ~DatasetReader();
 

@@ -26,6 +26,12 @@ struct Instance
     Objects objects;
 };
 
+struct Result
+{
+    int value;
+    long weight;
+    double executionTime;
+};
 
 struct Solution
 {

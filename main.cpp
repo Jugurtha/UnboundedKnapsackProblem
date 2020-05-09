@@ -29,31 +29,43 @@ int computeWeight(Objects const& orderedObj, std::vector<int> const& tuple)
 }
 
 int main() {
-    
-    std::string instancePathAghilas("../../ASMA/demoinstancetest.txt");
+
+    //std::string instancePathAghilas("../Datasets/demoinstancetest.txt");
     //auto instanceCours = Instance{130,{{33,4},{49,5},{60,6},{32,2}}};
     //std::string instancePath("../Datasets/Facile/Petite/FacilePetite.txt");
-    std::string instancePath(instancePathAghilas);
+    //std::string instancePath("../Datasets/Difficile/Petite/DifficilePetite.txt");
+    //std::string instancePath("../Datasets/Moyenne/Petite/MoyennePetite.txt");
+    std::string instancePath("../Datasets/exnsdbis10.ukp");
+    //std::string instancePath(instancePathAghilas);
     std::cout << "Instance : " << instancePath << '\n';
     DatasetReader datasetReader(instancePath);
     //auto instance = instanceCours;
     auto instance = datasetReader.getInstance();
     std::cout << "n : " << instance.objects.size() << '\n';
-    std::cout << "Max weight : " << instance.maxWeight << "\n\n";
+    std::cout << "Max weight : " << instance.maxWeight << "\n";
+    auto optimalResults = datasetReader.getOptimalResult();
+    std::cout << "Optimal value : "<< optimalResults.value << "\nMinimal weight for optimal value : " << optimalResults.weight
+     << "\nExecution time : " <<  optimalResults.executionTime*1000 << "\n\n";
+
 
     auto sorted = sortObjects(instance.objects);
-//*
+/*
     for(auto e : sorted)
         std::cout << "Weight : " << e.weight << ", Value : "<< e.value << '\n';
 //*/
-
+/*
     BranchAndBound bb(instance.maxWeight, instance.objects);
-    auto result = bb.search();
-    auto weight = computeWeight(sorted, result.tuple);
-    std::cout << "\nOptimal Solution :\nValue : " << result.value << "\nWeight : " <<  weight << '\n';
-
+    auto exactSolution = bb.search();
+    auto weight = computeWeight(sorted, exactSolution.tuple);
+    std::cout << "\nOptimal Solution :\nValue : " << exactSolution.value << "\nWeight : " <<  weight << '\n';
+    std::cout << "\nValue : " << exactSolution.value << "\nWeight : " <<  weight;
+    std::cout << "\nSet : {";
+    for(auto e : exactSolution.tuple)
+       std::cout << e << " ";
+    std::cout << "}\n\n";
+//*/
     TabuListBestValueSet tabuListBestValueSet;
-    StoppingConditionNbrIterations stoppingConditionNbrIterations(10);
+    StoppingConditionNbrIterations stoppingConditionNbrIterations(150);
     FitnessValue fitnessValue;
     AddOneLocalizer addOneLocalizer(instance);
     Tabu tabu(Solution{std::vector<int>(instance.objects.size(), 0), 0},
@@ -62,19 +74,28 @@ int main() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    result = tabu.search();
+    auto solution = tabu.search();
+
     auto end = std::chrono::high_resolution_clock::now();
 
-    weight = computeWeight(sorted, result.tuple);
+    Result result;
+    result.value = solution.value;
+    result.weight = computeWeight(sorted, solution.tuple);
+    result.executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
     Logger logger("log.csv");
-    logger.log(instancePath, result.value, weight, std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count());
+    logger.log(instancePath, optimalResults, result);
 
+//*
+    std::cout << "\nValue : " << result.value << "\nWeight : " <<  result.weight << "\nExecution time : " <<  result.executionTime;
+    std::cout << "\nDelta values : " << optimalResults.value - result.value <<
+    "\n\nDelta weights : " << optimalResults.weight - result.weight <<
+    "\nDelta execution time : " << optimalResults.executionTime*1000 - result.executionTime << '\n';
 
-    std::cout << "\nValue : " << result.value << "\nWeight : " <<  weight;
     std::cout << "\nSet : {";
-    for(auto e : result.tuple)
+    for(auto e : solution.tuple)
        std::cout << e << " ";
     std::cout << "}";
+//*/
 
     return 0;
 }

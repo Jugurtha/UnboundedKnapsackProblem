@@ -17,7 +17,7 @@ public:
     explicit StoppingConditionNbrIterations(const unsigned int maxNbrIterations) : MaxNbrIterations(maxNbrIterations) {nbrIterations=0;}
     bool virtual operator()(){
         nbrIterations++;
-        return nbrIterations <=  MaxNbrIterations;
+        return nbrIterations >  MaxNbrIterations;
     }
 
 private:

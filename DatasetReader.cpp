@@ -51,3 +51,36 @@ Instance DatasetReader::getInstance()
 DatasetReader::~DatasetReader() {
     infile.close();
 }
+
+
+Result DatasetReader::getOptimalResult() {
+    std::string line;
+    Result result;
+    infile.clear();
+    infile.seekg(0);
+    while (std::getline(infile, line) && line.rfind("end", 0) != 0);
+
+    std::getline(infile, line);//3 superfluous lines
+    std::getline(infile, line);
+    std::getline(infile, line);
+
+    std::getline(infile, line);//Optimal value
+    std::istringstream iss(line);
+    iss >> result.value;
+
+    std::getline(infile, line);//1 superfluous lines
+
+    std::getline(infile, line);//Minimal weight for optimal value.
+    std::istringstream iss2(line);
+    iss2 >> result.weight;
+
+    while (std::getline(infile, line) && line.rfind("Total", 0) != 0);
+    std::string sink;
+    std::istringstream iss3(line);
+    iss3 >> sink >> sink >> sink >> result.executionTime;
+
+    return result;
+}
+
+
+
