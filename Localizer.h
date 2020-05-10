@@ -11,13 +11,14 @@
 class Localizer {
 public:
     Localizer(Instance const& instance);
-
-    virtual Neighbourhood getNeighbors(Solution center) = 0;
+    virtual Neighbourhood getNeighbors(Solution const& center) = 0;
 
 protected:
-    Objects const& sortedObjects();
+    Objects sortObjects();
+    int sumWeight(Solution const& solution);
 
     Objects const& objects;
+    Objects sortedObjects;
     const int maxWeight;
     const bool sorted;
 };

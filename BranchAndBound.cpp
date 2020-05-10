@@ -23,7 +23,7 @@ std::vector<int> BranchAndBound::separate(unsigned int maxWeight, Objects const&
         }
     }
 
-    int maxIndex = 0;
+    unsigned int maxIndex = 0;
     while(true){
         if ( maxWeight >= ((maxIndex+1)*(sortedObjects[j].weight)) ){
             maxIndex++;
@@ -34,14 +34,14 @@ std::vector<int> BranchAndBound::separate(unsigned int maxWeight, Objects const&
 
 
     std::vector<int> returnedArray;
-    for(auto i = 0; i<= maxIndex; i++)
+    for(unsigned int i = 0; i<= maxIndex; i++)
         returnedArray.push_back(i);
     return returnedArray;
 }
 
 
 bool BranchAndBound::isASolution(unsigned int maxWeight, Objects const& sortedObjects,  std::vector<int> tuple) {
-    int j = 0;
+    unsigned int j = 0;
     for (auto i : tuple){
         maxWeight -= i*(sortedObjects[j].weight);
         j++;
@@ -59,7 +59,7 @@ bool BranchAndBound::isASolution(unsigned int maxWeight, Objects const& sortedOb
 BranchAndBound::Evaluation BranchAndBound::evaluate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple) {
     if (isASolution(maxWeight, sortedObjects,tuple)){
         double sum =0;
-        for (auto i=0; i<tuple.size(); i++) {
+        for (unsigned int i=0; i<tuple.size(); i++) {
             sum += tuple[i]*(sortedObjects[i].value);
         }
 
@@ -83,7 +83,7 @@ BranchAndBound::Evaluation BranchAndBound::evaluate(unsigned int maxWeight, Obje
 Objects BranchAndBound::sortObjects() {
 
     Objects sortedObjs;
-    for(int i = 0; i< weights.size();i++)
+    for(unsigned int i = 0; i< weights.size();i++)
         sortedObjs.push_back(Object{weights[i], values[i]});
 
     std::sort(sortedObjs.begin(), sortedObjs.end(),[](const Object & a, const Object & b) -> bool{
@@ -97,7 +97,7 @@ Objects BranchAndBound::sortObjects() {
 }
 
 Solution BranchAndBound::findSolution(unsigned int maxWeight, Objects const& sortedObjects) {
-    int objIndex = 0;
+    unsigned int objIndex = 0;
     int val = 0;
     auto tuple = std::vector<int>(sortedObjects.size(), 0);
 

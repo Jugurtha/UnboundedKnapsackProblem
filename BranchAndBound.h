@@ -29,7 +29,7 @@ public:
     };
 private:
     unsigned int maxWeight;
-    std::vector<int> weights;
+    std::vector<unsigned int> weights;
     std::vector<int> values;
 
     std::vector<int> separate(unsigned int maxWeight, Objects const& sortedObjects, std::vector<int> tuple);

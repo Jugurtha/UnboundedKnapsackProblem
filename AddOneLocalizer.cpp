@@ -6,15 +6,15 @@
 
 
 
-Neighbourhood AddOneLocalizer::getNeighbors(Solution center) {
+Neighbourhood AddOneLocalizer::getNeighbors(Solution const& center) {
     Neighbourhood neighbourhood;
     Solution next(center);
 
-    for (int i = 0; i < center.tuple.size(); ++i) {
+    for (unsigned int i = 0; i < center.tuple.size(); ++i) {
         next.tuple[i]++;
-        if(sumWeight(next)<maxWeight)
+        if(sumWeight(next)<=maxWeight)
         {
-            next.value += sortedObjects()[i].value;
+            next.value += sortedObjects[i].value;
             break;
         }
         else
@@ -26,15 +26,6 @@ Neighbourhood AddOneLocalizer::getNeighbors(Solution center) {
 }
 
 
-
-int AddOneLocalizer::sumWeight(Solution const& solution)
-{
-    int weight(0);
-    for (int i = 0; i < objects.size(); ++i)
-        weight += solution.tuple[i] * sortedObjects()[i].weight;
-
-    return weight;
-}
 
 AddOneLocalizer::AddOneLocalizer(const Instance &instance) : Localizer(instance) {}
 

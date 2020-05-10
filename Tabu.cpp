@@ -22,7 +22,7 @@ Solution Tabu::search() {
         if (tabuList.size() > maxTabuSize)
             tabuList.pop();
     }
-        
+
     return sBest;
 }
 

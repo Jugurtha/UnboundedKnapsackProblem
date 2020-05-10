@@ -11,13 +11,9 @@
 
 class AddOneLocalizer : public Localizer{
 public:
-    Neighbourhood getNeighbors(Solution center) override;
+    Neighbourhood getNeighbors(Solution const& center) override;
 
     AddOneLocalizer(const Instance &instance);
-
-private:
-    int sumWeight(Solution const& solution);
-    //int selectObject(std::unordered_set<Object> excluded);
 };
 
 

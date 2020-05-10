@@ -13,7 +13,7 @@
 
 
 struct Object{
-    int weight;
+    unsigned int weight;
     int value;
 };
 
@@ -22,7 +22,7 @@ using Objects =   std::vector<Object>;
 
 struct Instance
 {
-    int  maxWeight;
+    unsigned int  maxWeight;
     Objects objects;
 };
 

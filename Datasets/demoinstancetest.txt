@@ -46,3 +46,29 @@ begin data
 797	16793
 735	15487
 907	19111
+end data 
+Not a Saw ukp #The Result by EDUK release:  pyasukp_1.0 of march 1 2005 Copyright Vincent Poirriez, LAMIH/ROI
+#For datas: generated with formula no simple dominance ;
+#The optimal value for the given capacity
+285937
+#The minimal capacity  for the optimal value
+13570
+Upper bound: 13570
+
+Period reached: true ; Not collectively dominated items: 198 ;
+ Last capacity calculated: 29844 ;
+ reduction capacity : 8649
+
+	 index 	 nb 	 w 	 p
+sol: 
+	288	156	5687	6585
+	987	1	2131	2420
+
+Best_Item: 288 
+
+Total Time :    0.05000
+
+
+Time forward :    0.05000
+Time backtrack :    0.00000
+Nb critical points in sequence_result:                 3651

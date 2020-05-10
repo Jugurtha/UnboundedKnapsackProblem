@@ -38,7 +38,8 @@ Instance DatasetReader::getInstance()
     while (std::getline(infile, line))
     {
         std::istringstream iss(line);
-        int weight, value;
+        unsigned int weight;
+        int value;
         if (!(iss >> weight >> value)) { break; } // error
         instance.objects.push_back({weight,value});
         // process pair (a,b)
