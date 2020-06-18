@@ -218,19 +218,73 @@ int main() {
             item[i][0] = instance.objects[i].value;
             item[i][1] = instance.objects[i].weight;
         }
+        Solution greedySolution;
 
         printf("******************************************************************************** \n");
-        Greedy_Knapsack_Profit(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Knapsack_Profit(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
         printf("******************************************************************************** \n");
-        Greedy_Knapsack_Weight(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Knapsack_Weight(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
         printf("******************************************************************************** \n");
-        Greedy_Knapsack_Density(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Knapsack_Density(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
         printf("******************************************************************************** \n");
-        Greedy_Unbounded_Knapsack_Profit(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Unbounded_Knapsack_Profit(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
         printf("********************************************************************************\n");
-        Greedy_Knapsack_Unbounded_Weight(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Knapsack_Unbounded_Weight(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
         printf("********************************************************************************\n");
-        Greedy_Unbounded_Knapsack_Density(item, n-1, max);
+        start = std::chrono::high_resolution_clock::now();
+        greedySolution = Greedy_Unbounded_Knapsack_Density(item, n-1, max);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : greedySolution.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
 
         //--------------------------Genetic Algorithm--------------------------------------------------------
         std::cout << "--------------------------Genetic Algorithm-------------------------------------------------------\n";
