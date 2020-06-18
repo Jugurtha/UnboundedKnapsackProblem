@@ -6,6 +6,12 @@
 #include "Tabu.h"
 #include "AddOneLocalizer.h"
 #include "SwitchObjectsLocalizer.h"
+#include "Greedy.h"
+#include "Genetic.h"
+#include "HybridInit.h"
+#include "HybridIn.h"
+#include "HybridFin.h"
+
 
 Objects sortObjects(Objects const&  objs) {
     Objects sortedObjs;
@@ -58,7 +64,7 @@ int main() {
 //*/
     std::map<std::string, std::string> dataset;
     dataset["demoinstancetest"] = "../Datasets/demoinstancetest.txt";
-    dataset["FacilePetite"] = "../Datasets/Facile/Petite/FacilePetite.txt";
+/*    dataset["FacilePetite"] = "../Datasets/Facile/Petite/FacilePetite.txt";
     dataset["DifficilePetite"] = "../Datasets/Difficile/Petite/DifficilePetite.txt";
     dataset["MoyennePetite"] = "../Datasets/Moyenne/Petite/MoyennePetite.txt";
     dataset["exnsdbis10"] = "../Datasets/exnsdbis10.ukp";
@@ -68,7 +74,7 @@ int main() {
     dataset["exnsdbis18"] = "../Datasets/exnsdbis18.ukp";
     dataset["exnsd20"] = "../Datasets/exnsd20.ukp";
     dataset["exnsd26"] = "../Datasets/exnsd26.ukp";
-
+*/
     for(auto e : dataset){
 
         //std::string instancePath(dataset["demoinstancetest"]);
@@ -164,9 +170,163 @@ int main() {
                 std::cout << e << " ";
             std::cout << "}" << std::endl;
 //*/
+
+        }
+//*
+        auto start = std::chrono::high_resolution_clock::now();
+        auto end  = start;
+        //--------------------------Branch And Bound-------------------------------------------------------
+        std::cout << "--------------------------Branch And Bound-------------------------------------------------------\n";
+
+        BranchAndBound bb(instance.maxWeight, instance.objects);
+        start = std::chrono::high_resolution_clock::now();
+        auto resultBb = bb.search();//Used in HC below and different than Tabu result.
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : resultBb.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
+
+        //--------------------------Hill Climbing----------------------------------------------------------
+        std::cout << "--------------------------Hill Climbing-------------------------------------------------------\n";
+
+        HillClimbing hb(instance.maxWeight, instance.objects);
+        int iterations=100;
+        start = std::chrono::high_resolution_clock::now();
+        auto result_HillClimbing= hb.Run(resultBb,iterations);
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : result_HillClimbing.tuple)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+//*/
+        //--------------------------Greedy Algorithm--------------------------------------------------------
+        std::cout << "--------------------------Greedy Algorithm-------------------------------------------------------\n";
+
+        int n = instance.objects.size();
+        int max = instance.maxWeight;
+        int** item = new int*[n];
+        for (int i = 0; i < n; ++i) {
+            item[i] = new int[2];
+        }
+        for (int i = 0; i < n; ++i) {
+            item[i][0] = instance.objects[i].value;
+            item[i][1] = instance.objects[i].weight;
         }
 
+        printf("******************************************************************************** \n");
+        Greedy_Knapsack_Profit(item, n-1, max);
+        printf("******************************************************************************** \n");
+        Greedy_Knapsack_Weight(item, n-1, max);
+        printf("******************************************************************************** \n");
+        Greedy_Knapsack_Density(item, n-1, max);
+        printf("******************************************************************************** \n");
+        Greedy_Unbounded_Knapsack_Profit(item, n-1, max);
+        printf("********************************************************************************\n");
+        Greedy_Knapsack_Unbounded_Weight(item, n-1, max);
+        printf("********************************************************************************\n");
+        Greedy_Unbounded_Knapsack_Density(item, n-1, max);
+
+        //--------------------------Genetic Algorithm--------------------------------------------------------
+        std::cout << "--------------------------Genetic Algorithm-------------------------------------------------------\n";
+
+        size_t pptsize = 10;
+        std::vector<Item> items;
+        for(auto o : instance.objects)
+            items.push_back({o.weight, (std::size_t )o.value});
+
+        auto geneticSolver = GeneticKnapsackSolver(
+                items,
+                instance.maxWeight,  // capacity
+                pptsize,     // population size
+                50,     // iterations
+                0.9, //crossover probability
+                0.00005);
+        start = std::chrono::high_resolution_clock::now();
+        auto geneticResult = geneticSolver.solve();
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : geneticResult.chromosome)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
+
+        //--------------------------HybridInit Algorithm--------------------------------------------------------
+        std::cout << "--------------------------HybridInit Algorithm-------------------------------------------------------\n";
+
+        pptsize = 10;
+        auto hybridInitSolver = HybridInitKnapsackSolver(
+                instance.objects,
+                instance.maxWeight,  // capacity
+                pptsize,     // population size
+                50,     // iterations
+                0.9, //crossover probability
+                0.3, //hill probability
+                0.00005);    // mutation rate
+        start = std::chrono::high_resolution_clock::now();
+        auto HybridInitResult = hybridInitSolver.solve();
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : HybridInitResult.chromosome)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
+        //--------------------------HybridIn Algorithm--------------------------------------------------------
+        std::cout << "--------------------------HybridIn Algorithm-------------------------------------------------------\n";
+
+        pptsize = 10;
+        auto hybridInSolver = HybridInKnapsackSolver(
+                instance.objects,
+                instance.maxWeight,  // capacity
+                pptsize,     // population size
+                50,     // iterations
+                0.9, //crossover probability
+                0.3, //hill probability
+                0.00005);    // mutation rate
+        start = std::chrono::high_resolution_clock::now();
+        auto hybridInResult = hybridInSolver.solve();
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : hybridInResult.chromosome)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
+        //--------------------------HybridFin Algorithm--------------------------------------------------------
+        std::cout << "--------------------------HybridFin Algorithm-------------------------------------------------------\n";
+
+        pptsize = 10;
+        auto HybridFinSolver = HybridFinKnapsackSolver(
+                instance.objects,
+                instance.maxWeight,  // capacity
+                pptsize,     // population size
+                50,     // iterations
+                0.9, //crossover probability
+                0.00005);    // mutation rate
+        start = std::chrono::high_resolution_clock::now();
+        auto HybridFinResult = HybridFinSolver.solve();
+        end = std::chrono::high_resolution_clock::now();
+
+        std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        std::cout << "\nSet : {";
+        for(auto e : HybridFinResult.chromosome)
+            std::cout << e << " ";
+        std::cout << "}" << std::endl;
+
     }
+
+
+
 
 
     return 0;
