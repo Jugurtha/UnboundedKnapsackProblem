@@ -47,12 +47,12 @@ Neighbourhood SwitchObjectsLocalizer::getNeighbors(Solution const& center) {
 
 SwitchObjectsLocalizer::SwitchObjectsLocalizer(const Instance &instance, const unsigned int nbrTries) : Localizer(instance),
  nbrTries(nbrTries), nbrObjects(instance.objects.size()), ratios(getRatios()),
-            rng(dev()), dist(ratios.begin(), ratios.end())
+           rng(dev()), dist(ratios.begin(), ratios.end())
 {
     rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
 /*
-    const int nrolls=10000000;  // number of experiments
-    const int nstars=100000;    // maximum number of stars to distribute
+    const int nrolls=10000;//000;  // number of experiments
+    const int nstars=1000;//0;    // maximum number of stars to distribute
 
     std::map<int, int> hist;
     for (int n = 0; n < nrolls; ++n) {
@@ -62,7 +62,7 @@ SwitchObjectsLocalizer::SwitchObjectsLocalizer(const Instance &instance, const u
     for (auto p : hist) {
         std::cout << p.first << " : " << std::string(p.second*nstars/nrolls,'*') << '\n';
     }
-    */
+    //*/
 }
 
 

@@ -21,6 +21,7 @@ private:
     const std::vector<double> ratios;
     std::random_device dev;
     std::mt19937 rng;
+    //std::uniform_int_distribution<> dist;
     //std::exponential_distribution<> dist;
     std::discrete_distribution<> dist;
 

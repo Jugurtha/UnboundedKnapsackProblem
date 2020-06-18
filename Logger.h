@@ -16,7 +16,7 @@
 class Logger {
 public:
     Logger(const std::string &path);
-    void log(std::string instance, Result const& optimalResult, Result const& instanceResult);
+    void log(TabuType type, std::string instance, Result const& optimalResult, Result const& instanceResult, std::string const& parameters);
     virtual ~Logger();
 
 private:

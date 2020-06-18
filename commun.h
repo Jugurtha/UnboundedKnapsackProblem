@@ -70,6 +70,7 @@ struct Solution
 };
 
 
-
+enum TabuType {ADD_ONE, SWITCH_OBJ, NBR_TYPES};
+const std::string TABU_TYPE_STRING[] = {std::string("ADD_ONE"), std::string("SWITCH_OBJ"), std::string("NBR_TYPES")};
 
 #endif //UNBOUNDEDKNAPSACKPROBLEM_COMMUN_H

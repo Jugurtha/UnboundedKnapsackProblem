@@ -10,10 +10,14 @@ Logger::~Logger() {
     outfile.close();
 }
 
-void Logger::log(std::string instance, Result const& optimalResult, Result const& instanceResult) {
+void Logger::log(TabuType type, std::string instance, Result const& optimalResult, Result const& instanceResult, std::string const& parameters) {
     outfile << time(NULL)
-     << ", " << instance << ", " << optimalResult.value << ", " << optimalResult.weight << ", " << optimalResult.executionTime
-     << ", " << instanceResult.value << ", " << instanceResult.weight << ", " << instanceResult.executionTime << "\n";
+     << ", " << instance << ", " << TABU_TYPE_STRING[type] << ", " << optimalResult.value << ", " << optimalResult.weight << ", " << optimalResult.executionTime
+     << ", " << instanceResult.value << ", " << instanceResult.weight << ", " << instanceResult.executionTime;
+    if(!parameters.empty())
+        outfile << ", " << parameters << "\n";
+    else
+        outfile << "\n";
 }
 
 
