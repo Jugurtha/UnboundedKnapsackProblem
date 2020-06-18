@@ -196,7 +196,7 @@ int main() {
         HillClimbing hb(instance.maxWeight, instance.objects);
         int iterations=100;
         start = std::chrono::high_resolution_clock::now();
-        auto result_HillClimbing= hb.Run(resultBb,iterations);
+        auto result_HillClimbing= hb.Run(iterations);
         end = std::chrono::high_resolution_clock::now();
 
         std::cout << "\nTime : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();

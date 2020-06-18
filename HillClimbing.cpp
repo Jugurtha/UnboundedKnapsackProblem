@@ -86,7 +86,7 @@ void HillClimbing::print_solution(Solution candidata)
     std::cout << candidata.value << "\n";
 };
 
-Solution HillClimbing::Run(Solution optimale,int rounds)
+Solution HillClimbing::Run(int rounds)
 {
     int round = 0;
 Solution global,candidata,global_save;
@@ -115,15 +115,12 @@ candidata.value=candidata.value-values[round];
                 max=candidata.value;
                 save_i = i;
             }
-            if(candidata.tuple == optimale.tuple)
-            {
-                return candidata;
-            }
+
         }
         if (booleen==1) {
             global.tuple = Ajout(global.tuple, save_i);
             global.value = Evaluation(global.tuple);
-            global = Determination(global_save,global);
+          //  global = Determination(global_save,global);
             global_save.tuple = global.tuple;
             global_save.value = global.value;
         }

@@ -139,7 +139,7 @@ auto HybridFinKnapsackSolver::solve() -> decltype(solution())
         sols[i] = dec;
 
     }
-    auto result_HillClimbing = hb.Run({sols,0}, iterations);
+    auto result_HillClimbing = hb.Run(iterations);
     sols = result_HillClimbing.tuple;
     int m = 0;
     for (int l = 0;l < sols.size();l++) {

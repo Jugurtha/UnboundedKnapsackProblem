@@ -128,7 +128,7 @@ auto HybridInKnapsackSolver::solve() -> decltype(solution())
                 pt += sizes[i];
 
             }
-            auto result_HillClimbing = hb.Run({sols,0}, iterations);
+            auto result_HillClimbing = hb.Run(iterations);
             sols = result_HillClimbing.tuple;
             int m = 0;
             for (size_t l = 0;l < sols.size();l++) {

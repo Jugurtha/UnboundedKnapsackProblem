@@ -1,16 +1,15 @@
 
 // Created by BENKACI ASMA on 30/04/2020 TP OPTIM HEURISTIQUE VOISINAGE RECHERCHE LOCALE HILL CLIMBING
 
-
-#ifndef HILL_CLIMBING
-#define HILL_CLIMBING
+#ifndef HillClimbing_H
+#define HillClimbing_H
 
 #include <vector>
 #include <tuple>
 #include <map>
 #include <algorithm>
 #include <iostream>
-#include "../Hill Climbing/HillClimbing_UnboundedKnapsack/commun.h"
+#include "commun.h"
 
 class HillClimbing {
 public:
@@ -20,7 +19,7 @@ public:
     int Evaluation(std::vector<int> &solution);
     Solution Determination(Solution candidata, Solution global);
     void print_solution(Solution candidata);
-    Solution Run(Solution optimale,int rounds);
+    Solution Run(int rounds);
 
 
 public:
