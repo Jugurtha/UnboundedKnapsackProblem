@@ -69,6 +69,7 @@ public:
     const Solution& solution() const;
     auto solve() -> decltype(solution());
     vector<Item> getItems();
+    std::vector<int> getObjects();
 
 private:
     bool compare(const Item &a, const Item &b);
