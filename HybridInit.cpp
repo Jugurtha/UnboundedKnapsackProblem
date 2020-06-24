@@ -288,3 +288,32 @@ int HybridInitKnapsackSolver::weight(const chromosome_t& chromosome) const
     }
     return weight;
 }
+
+std::vector<int> HybridInitKnapsackSolver::getObjects()
+{
+    size_t weight = 0;
+    size_t value = 0;
+    int coef;
+    int dec;
+    int pt = 0;
+    vector <Object> objs = getItems();
+
+    std::vector<int> objects;
+    for(unsigned int i =0;i<objs.size(); i++)
+        objects.push_back(0);
+
+    for (unsigned int i = 0;i <sizes.size();i++) {
+        coef = 1;dec = 0;
+        for (int j = pt;j < pt + sizes[i];j++) {
+            dec += solution_.chromosome[j] * coef;
+            coef *= 2;
+
+        }
+        weight += objs[i].weight*dec;
+        value += objs[i].value*dec;
+        pt += sizes[i];
+
+        objects[i] = dec;
+    }
+    return objects;
+}

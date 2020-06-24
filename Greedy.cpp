@@ -35,12 +35,12 @@ Solution Greedy_Knapsack_Profit(int **item,  int n, int max) {
     }
 
 
-//    cout << "Greedy_Knapsack_Profit profit :" ;
-//    cout << "Profit : ";
-//    cout << an ;
-//    cout << " poids :";
+cout << "Greedy_Knapsack_Profit profit :" ;
+cout << "Profit : ";
+cout << an ;
+cout << " poids :";
     int pod = max - tmp;
-//    cout << pod << endl;
+cout << pod << endl;
 
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "  taille " << n+1 << endl;
@@ -83,12 +83,12 @@ Solution Greedy_Unbounded_Knapsack_Profit(int **item,  int n, int max) {
 
     }
 
-//    cout << "Greedy_Unbounded_Knapsack_Profit ";
-//    cout << "Profit : ";
-//    cout << an ;
-//    cout << "Poids " ;
+cout << "Greedy_Unbounded_Knapsack_Profit ";
+cout << "Profit : ";
+cout << an ;
+cout << "Poids " ;
     int pod = max - tmp;
-//    cout << pod << endl;
+cout << pod << endl;
 
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "   taille " << n+1 << endl;
@@ -128,12 +128,12 @@ Solution Greedy_Knapsack_Weight(int **item,  int n, int max) {
     }
 
 
-//    cout << "Greedy_Knapsack_Weight profit :" ;
-//    cout << "Le Profit :";
-//    cout << an ;
-//    cout << "Poids : " ;
+cout << "Greedy_Knapsack_Weight profit :" ;
+cout << "Le Profit :";
+cout << an ;
+cout << "Poids : " ;
     int pod = max - tmp;
- //   cout << pod << endl;
+cout << pod << endl;
 //
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "  taille " << n+1 << endl;
@@ -173,12 +173,12 @@ Solution Greedy_Knapsack_Unbounded_Weight(int **item,  int n, int max) {
         }
     }
 
-//    cout << "Greedy_Unbounded_Knapsack_Weight " ;
-//    cout << "Profit : ";
-//    cout << an ;
-//    cout << "Poids : " ;
+cout << "Greedy_Unbounded_Knapsack_Weight " ;
+cout << "Profit : ";
+cout << an ;
+cout << "Poids : " ;
     int pod = max - tmp;
- //   cout << pod << endl;
+cout << pod << endl;
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "   taille " << n+1 << endl;
 //    outfile.close();
@@ -199,7 +199,7 @@ Solution Greedy_Knapsack_Density(int **item,  int n, int max) {
     int tmp = max;
     int an = 0;
 
-    double arr[10000];
+    double *arr = new double[n];
 
     for (int i = 0; i < n; i++) {
         arr[i] = (double) item[i][0] / (double)item[i][1];
@@ -230,20 +230,19 @@ Solution Greedy_Knapsack_Density(int **item,  int n, int max) {
         }
     }
 
-//    cout << "Greedy_Knapsack_Density :  " ;
-//    cout << "Profit :  ";
-//    cout << an ;
-//    cout << "Poids : " ;
+cout << "Greedy_Knapsack_Density :  " ;
+cout << "Profit :  ";
+cout << an ;
+cout << "Poids : " ;
     int pod = max - tmp;
-//    cout << pod << endl;
+cout << pod << endl;
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "    taille   " << n+1 << endl;
 //    outfile.close();
     s.value = an;
+    delete arr;
+
     return s;
-
-
-
 }
 ///////////////////////////////Unbounded Knapsack/////////////////////////////////////////////////
 Solution Greedy_Unbounded_Knapsack_Density(int **item,  int n, int max) {
@@ -255,7 +254,7 @@ Solution Greedy_Unbounded_Knapsack_Density(int **item,  int n, int max) {
     int an = 0;
     int nbr_inst = 0;
 
-    double arr[10000];
+    double *arr = new double[n];
 
     for (int i = 0; i < n; i++) {
         arr[i] = (double) item[i][0] / (double) item[i][1];
@@ -284,16 +283,18 @@ Solution Greedy_Unbounded_Knapsack_Density(int **item,  int n, int max) {
         }
     }
 
-//    cout << "Greedy_Unbounded_Knapsack_Density :" ;
-//    cout << "Profit :";
-//    cout << an ;
-//    cout << "Poids : " ;
+cout << "Greedy_Unbounded_Knapsack_Density :" ;
+cout << "Profit :";
+cout << an ;
+cout << "Poids : " ;
     int pod = max - tmp;
-//    cout << pod << endl;
+cout << pod << endl;
 //    outfile << "nombre d'elements choisie  " << nbr << " profit Total " << an << " poids Total " << pod << endl;
 //    outfile << "poids maximale   " << max << "   taille " << n+1 << endl;
 //    outfile.close();
     s.value = an;
+    delete arr;
+
     return s;
 
 }

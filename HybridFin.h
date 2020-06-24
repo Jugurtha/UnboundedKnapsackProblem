@@ -48,6 +48,7 @@ public:
     const Solution_g& solution() const;
     auto solve() -> decltype(solution());
     vector<Object> getItems();
+    vector<int> getObjects();
 
 
 private:

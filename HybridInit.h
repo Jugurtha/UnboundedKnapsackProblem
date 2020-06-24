@@ -55,8 +55,10 @@ public:
     auto solve() -> decltype(solution());
     vector<Object> getItems();
 
+    std::vector<int> getObjects();
 
-        private:
+
+private:
     vector<Object> items_;
     int          capacity_;
     population_t population_;

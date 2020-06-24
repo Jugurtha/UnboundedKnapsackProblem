@@ -235,8 +235,6 @@ std::vector<int> GeneticKnapsackSolver::getObjects()
         pt += sizes[i];
 
         objects[i] = dec;
-        if(dec)
-        std::cout << i << " eme objet: " << dec << "\n";
     }
     return objects;
 }

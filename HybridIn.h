@@ -54,6 +54,8 @@ public:
     const Solution_g& solution() const;
     auto solve() -> decltype(solution());
     vector<Object> getItems();
+    std::vector<int> getObjects();
+
 
 private:
     static bool compare(const Object &a, const Object &b);

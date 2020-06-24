@@ -295,5 +295,23 @@ size_t HybridFinKnapsackSolver::weight(const chromosome_t& chromosome) const
 
 
 
+std::vector<int> HybridFinKnapsackSolver::getObjects()
+{
+    std::vector<int> result;
+    int coef;
+    int dec;
+    int pt = 0;
+    vector<Object> objs = this->items_;
+    for (int i = 0;i < this->sizes.size();i++) {
+        coef = 1;dec = 0;
+        for (int j = pt;j < pt + this->sizes[i];j++) {
+            dec += solution_.chromosome[j] * coef;
+            coef *= 2;
 
+        }
+        pt += this->sizes[i];
+        result.push_back(dec);
+    }
+    return result;
+}
 

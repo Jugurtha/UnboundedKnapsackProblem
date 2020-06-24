@@ -41,7 +41,8 @@ Instance DatasetReader::getInstance()
         unsigned int weight;
         int value;
         if (!(iss >> weight >> value)) { break; } // error
-        instance.objects.push_back({weight,value});
+        Object o; o.value = value; o.weight = weight;
+        instance.objects.push_back(o);
         // process pair (a,b)
     }
 /*    for(auto e : instance.objects)
